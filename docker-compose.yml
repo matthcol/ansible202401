@@ -5,6 +5,7 @@ services:
   host1:
     image: debianssh12
     build: ./debianssh12
+    hostname: host1
     ports:
       - ${SSH_PORT1:-22}:22
     volumes:
@@ -14,18 +15,21 @@ services:
   host2:
     image: debianssh12
     build: ./debianssh12
+    hostname: host2
     ports:
       - ${SSH_PORT2:-23}:22
 
   host3:
     image: debianssh12
     build: ./debianssh12
+    hostname: host3
     ports:
       - ${SSH_PORT3:-24}:22
 
   host4:
     image: debianssh11
     build: ./debianssh11
+    hostname: host4
     ports:
       - ${SSH_PORT4:-25}:22
 
