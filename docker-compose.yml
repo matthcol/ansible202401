@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+
+  host1:
+    image: debianssh12
+    build: ./debianssh12
+    ports:
+      - ${SSH_PORT1:-22}:22
+    volumes:
+      - ./ansible:/home/srvadmin/ansible
+      - ./artufacts:/mnt/artifacts
+
+  host2:
+    image: debianssh12
+    build: ./debianssh12
+    ports:
+      - ${SSH_PORT2:-23}:22
+
+  host3:
+    image: debianssh12
+    build: ./debianssh12
+    ports:
+      - ${SSH_PORT3:-24}:22
+
+  host4:
+    image: debianssh11
+    build: ./debianssh12
+    ports:
+      - ${SSH_PORT4:-25}:22
+
