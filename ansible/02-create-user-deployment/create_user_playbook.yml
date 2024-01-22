@@ -1,0 +1,13 @@
+---
+- name: Create user for future deployments
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create User
+      ansible.builtin.user:
+        name: ender
+    - name: Copy public SSH Key
+      ansible.posix.authorized_key:
+        user: ender
+        state: present
+        key: "{{ lookup('file', '/home/srvadmin/.ssh/id_rsa_ender.pub') }}"
