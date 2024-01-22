@@ -4,15 +4,42 @@
 
 ### Build and start hosts (docker)
 ```
+# build and start all
 docker compose up -d
 
-docker compose build host4
-docker compose up host4 -d
+# rebuild host 5
+docker compose build host5
+
+# (re)create host5
+docker compose up host5 -d
 ```
 
 
 ### Bash on pilot host (host1)
 docker compose exec -it host1 bash
+
+### Ssh commands
+```
+ssh host2
+ssh srvadmin@host2
+ssh -i ~/.ssh/id_rsa_ender ender@host2
+
+ssh-keygen
+
+# start ssh agent
+ssh-agent
+# copy-paste output ssh-agent
+
+# unlock identity
+ssh-add  ~/.ssh/id_rsa_ender
+
+# list identities
+ssh-add -L 
+
+# remove all identities
+ssh-add -D
+
+```
 
 ## Install Ansible
 apt install ansible sshpass
