@@ -1,7 +1,7 @@
 FROM debian:bullseye
 RUN mkdir /var/run/sshd; \
     apt update && apt-get install -y tzdata openssh-server sudo python3; \
-    useradd -s /usr/bin/bash -m -G sudo srvadmin; \
+    useradd -s /bin/bash -m -G sudo srvadmin; \
     mkdir /home/srvadmin/ansible; \
     chown srvadmin:srvadmin  /home/srvadmin/ansible; \
     mkdir /mnt/artifacts; \

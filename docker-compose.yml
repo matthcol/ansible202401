@@ -9,7 +9,7 @@ services:
       - ${SSH_PORT1:-22}:22
     volumes:
       - ./ansible:/home/srvadmin/ansible
-      - ./artufacts:/mnt/artifacts
+      - ./artifacts:/mnt/artifacts
 
   host2:
     image: debianssh12
@@ -25,7 +25,7 @@ services:
 
   host4:
     image: debianssh11
-    build: ./debianssh12
+    build: ./debianssh11
     ports:
       - ${SSH_PORT4:-25}:22
 
