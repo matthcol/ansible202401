@@ -1,0 +1,9 @@
+---
+- name: Prepare FS
+  hosts: nodeserver
+  become: yes
+  tasks:
+    - name: Create directory
+      ansible.builtin.file:
+        path: /usr/src/app
+        state: absent

@@ -1,0 +1,19 @@
+---
+- name: Prepare FS
+  hosts: nodeserver
+  become: yes
+  tasks:
+    - name: Create directory
+      ansible.builtin.file:
+        path: /usr/src/app
+        state: directory
+        owner: ender
+        group: ender
+        mode: 0750
+    - name: Copy artifact
+      ansible.builtin.copy:
+        src: /mnt/artifacts/app.js
+        dest: /usr/src/app
+        owner: ender
+        group: ender
+        mode: 0640
