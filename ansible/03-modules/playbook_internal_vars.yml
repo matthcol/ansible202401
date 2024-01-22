@@ -1,5 +1,5 @@
 ---
-- name: Prepare FS
+- name: Install App Server
   hosts: nodeserver
   become: yes
   vars:
@@ -9,6 +9,12 @@
     - name: Debug var app_dir
       ansible.builtin.debug:
         var: app_dir
+    - name: Debug variables
+      ansible.builtin.debug:
+        msg:
+          - dbname = {{ dbname }}
+          - artifacts directory = {{ dir_artifacts }}
+          - artifact node app = {{ app_artifact }}
     - name: Create directory
       ansible.builtin.file:
         path: "{{ app_dir }}"
@@ -18,8 +24,33 @@
         mode: 0750
     - name: Copy artifact
       ansible.builtin.copy:
-        src: /mnt/artifacts/app.js
+        src: "{{ dir_artifacts }}/{{ app_artifact }}" 
         dest: "{{ app_dir }}"
         owner: "{{ owner }}"
         group: "{{ owner }}"
         mode: 0640
+    - name: Install nodejs
+      ansible.builtin.apt:
+        name: nodejs
+
+- name: Install DB Server
+  hosts: dbserver
+  become: yes
+  tasks:
+    - name: Install package gpg
+      ansible.builtin.apt:
+        name: gpg
+
+    - name: Add GPG Key of Postgresql Repository
+      ansible.builtin.apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    
+    - name: Add Postgresql Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main
+        filename: postgresql
+
+    - name: Install Postgresql
+      ansible.builtin.apt:
+        name: postgresql-{{ postgresql_version }}
+        update_cache: yes
