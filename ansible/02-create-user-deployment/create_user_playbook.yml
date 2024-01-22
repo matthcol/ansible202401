@@ -11,3 +11,10 @@
         user: ender
         state: present
         key: "{{ lookup('file', '/home/srvadmin/.ssh/id_rsa_ender.pub') }}"
+    - name: Add user to sudoers without password
+      community.general.sudoers:
+        name: 99-ansible
+        user: ender
+        nopassword: true
+        commands: ALL
+

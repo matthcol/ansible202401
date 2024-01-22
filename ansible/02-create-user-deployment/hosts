@@ -1,6 +1,9 @@
-[servers12]
+[servers_deb12]
 host2
 host3
 
-[servers11]
+[servers_deb11]
 host4
+
+[servers_rocky9]
+host5

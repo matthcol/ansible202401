@@ -33,3 +33,9 @@ services:
     ports:
       - ${SSH_PORT4:-25}:22
 
+  host5:
+    image: rockyssh9
+    build: ./rockyssh9
+    hostname: host5
+    ports:
+      - ${SSH_PORT5:-26}:22
