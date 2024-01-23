@@ -1,0 +1,69 @@
+---
+- name: Play with variables
+  hosts: "*"
+  vars:
+    sauces: ['aioli', 'bbq', 'samouraï']
+    poissons:
+      - colin
+      - sardine
+      - thon
+    prices:
+      biere: 3.5
+      sandwich: 8.5
+  tasks:
+    - name: Ansible facts
+      ansible.builtin.debug:
+        # var: ansible_facts
+        # var: ansible_facts['distribution_release']
+        var: ansible_facts.distribution_release
+    - name: Ansible variables (facts)
+      ansible.builtin.debug:
+        msg:
+          - "ansible_os_family = {{ ansible_os_family }}"
+          - "ansible_distribution = {{ ansible_distribution }}"
+          - "ansible_distribution_release = {{ ansible_distribution_release }}"
+    - name: Ansible variables (facts)
+      ansible.builtin.debug:
+        msg:
+          - "groups = {{ groups }}"
+          - "db hostname = {{ groups.dbserver[0] | default('no db server') }}"
+          - "inventory_hostname = {{ inventory_hostname }} vs ansible_host = {{ ansible_host }}"
+    - name: My variables
+      ansible.builtin.debug:
+        msg:
+          - "sauces: {{ sauces }}"
+          - "première sauce: {{ sauces[0] }}"
+          - "poissons: {{ poissons }}"
+          - "nb poissons: {{ poissons | length }}"
+          - "last poisson: {{ poissons[-1] }}"
+          - "poissons MAJ: {{ poissons | map('upper') }}"
+          - "bbq king: {{ bbq_kind }}"
+          - "prices: {{ prices }}"
+          - "price biere: {{ prices['biere'] }}€ or {{ prices.biere }}€ "
+
+    - name: Loop sur les poissons
+      ansible.builtin.debug:
+        msg: "un poisson: {{ item }}"
+      with_items: "{{ poissons }}"
+
+    - name: Loop sur des valeurs
+      ansible.builtin.debug:
+        msg: "item: {{ item }}"
+      with_items:
+        - briquet
+        - charbon
+        - gant
+        - "{{ poissons[0] }}"
+
+    - name: Modern loop
+      ansible.builtin.debug:
+        msg: "un poisson: {{ item }}"
+      loop: "{{ poissons }}"
+        
+    - name: Modern loop 2
+      ansible.builtin.debug:
+        msg: "un poisson: {{ poisson }} #{{ i }}"
+      loop: "{{ poissons }}"
+      loop_control:
+        loop_var: poisson
+        index_var: i

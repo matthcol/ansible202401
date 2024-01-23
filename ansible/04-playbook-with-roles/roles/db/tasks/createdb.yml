@@ -12,7 +12,7 @@
   - name: Create User DB
     community.postgresql.postgresql_user:
       name: "{{ dbuser }}"
-      password: "{{ dbpassword }}"
+      password: "{{ vault_dbpassword }}"
   - name: Create DB  
     community.postgresql.postgresql_db:
       name: "{{ dbname }}"
