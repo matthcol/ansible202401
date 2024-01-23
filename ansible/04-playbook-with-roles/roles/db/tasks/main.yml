@@ -1,22 +1,24 @@
 ---
 # tasks file for roles/db
-- name: Install package gpg
-  ansible.builtin.apt:
-    name: gpg
+- tags: PACKAGE
+  block:
+  - name: Install package gpg
+    ansible.builtin.apt:
+      name: gpg
 
-- name: Add GPG Key of Postgresql Repository
-  ansible.builtin.apt_key:
-    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+  - name: Add GPG Key of Postgresql Repository
+    ansible.builtin.apt_key:
+      url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
 
-- name: Add Postgresql Repository
-  ansible.builtin.apt_repository:
-    repo: deb https://apt.postgresql.org/pub/repos/apt bullseye-pgdg main
-    filename: postgresql
+  - name: Add Postgresql Repository
+    ansible.builtin.apt_repository:
+      repo: deb https://apt.postgresql.org/pub/repos/apt bullseye-pgdg main
+      filename: postgresql
 
-- name: Install Postgresql
-  ansible.builtin.apt:
-    name: postgresql-{{ postgresql_version |default(15) }}
-    update_cache: yes
+  - name: Install Postgresql
+    ansible.builtin.apt:
+      name: postgresql-{{ postgresql_version |default(15) }}
+      update_cache: yes
 
 - name: Start service
   ansible.builtin.service:

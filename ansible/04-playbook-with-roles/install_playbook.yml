@@ -2,6 +2,7 @@
 - name: Install Database
   hosts: dbserver
   become: yes
+  tags: DB
   roles:
     - common
     - db 
@@ -9,6 +10,7 @@
 - name: Install Application
   hosts: appserver
   become: yes
+  tags: APP
   roles:
     - common
     - app

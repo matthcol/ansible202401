@@ -15,6 +15,7 @@
     group: "{{ owner }}"
     mode: 0640
 - name: Install nodejs
+  tags: PACKAGE
   ansible.builtin.dnf:
     name: nodejs
 

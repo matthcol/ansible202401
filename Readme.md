@@ -121,3 +121,24 @@ NB: links
 - https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html
 - https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html
 
+## Execution partielle (tags, start at task)
+```
+# start at task
+ansible-playbook -i hosts -u ender --start-at-task "Start service" install_playbook.yml
+
+# list tags
+ansible-playbook -i hosts --list-tags install_playbook.yml
+ansible-playbook -i hosts --list-tags --list-tasks -v install_playbook.yml
+
+# execute only with tag(s)
+ansible-playbook -i hosts -t DB -u ender install_playbook.yml
+ansible-playbook -i hosts -t APP -u ender install_playbook.yml
+ansible-playbook -i hosts -t PACKAGE -u ender install_playbook.yml
+ansible-playbook -i hosts -t DB,PACKAGE -u ender install_playbook.yml
+
+# execute excluding tag(s)
+ansible-playbook -i hosts --skip-tags PACKAGE -u ender install_playbook.yml
+
+# execute selecting and excluding tag(s)
+ansible-playbook -i hosts -t DB --skip-tags PACKAGE -u ender install_playbook.yml
+```
