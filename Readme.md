@@ -142,3 +142,15 @@ ansible-playbook -i hosts --skip-tags PACKAGE -u ender install_playbook.yml
 # execute selecting and excluding tag(s)
 ansible-playbook -i hosts -t DB --skip-tags PACKAGE -u ender install_playbook.yml
 ```
+
+## Import (static) vs Include (dynamic)
+https://docs.ansible.com/ansible/devel/playbook_guide/playbooks_reuse.html
+
+## Vaults
+Tool: ansible-vault create|encrypt|decrypt|rekey|view
+
+```
+export ANSIBLE_VAULT_PASSWORD_FILE=./.vault_pass
+```
+- https://docs.ansible.com/ansible/latest/vault_guide/index.html
+- https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data
