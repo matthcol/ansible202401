@@ -76,3 +76,8 @@ ansible -i hosts -u srvadmin -k -b -K -m user -a "name=ender state=absent remove
 ```
  ansible-playbook -i hosts -k -K create_user_playbook.yml
  ```
+
+(with user SSH ender and SSH key unlocked)
+```
+ ansible-playbook -i hosts -u ender playbook.yml
+ ```

@@ -54,3 +54,8 @@
       ansible.builtin.apt:
         name: postgresql-{{ postgresql_version }}
         update_cache: yes
+
+    - name: Start service
+      ansible.builtin.service:
+        name: postgresql
+        state: started
