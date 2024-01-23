@@ -1,2 +1,10 @@
 ---
 # handlers file for roles/db
+- name: Postgresql Installed
+  ansible.builtin.debug:
+    msg: "Handler 1: Postgresql has been installed"
+
+- name: Super Handler
+  ansible.builtin.debug:
+    msg: "Handler 2: Postgresql has been installed, enjoy BBQ"
+  listen: "Postgresql Installed"

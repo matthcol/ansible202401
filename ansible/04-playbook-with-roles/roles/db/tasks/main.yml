@@ -9,20 +9,40 @@
   - name: Add GPG Key of Postgresql Repository
     ansible.builtin.apt_key:
       url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    register: add_gpg_key
+    ignore_errors: true
+
+  - name: Debug Error While adding GPG Key
+    ansible.builtin.debug:
+      msg: "Error while adding GPG key: {{ add_gpg_key }}"
+    when: add_gpg_key is failed
+    failed_when: true
 
   - name: Add Postgresql Repository
     ansible.builtin.apt_repository:
-      repo: deb https://apt.postgresql.org/pub/repos/apt bullseye-pgdg main
+      repo: deb https://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
       filename: postgresql
+    register: add_repo
+
+  - name: Status Add PostgreSQL Repository
+    ansible.builtin.debug:
+      var: add_repo
+
+  - name: Apt Update
+    ansible.builtin.apt:
+      update_cache: yes
+    when: add_repo is changed
 
   - name: Install Postgresql
     ansible.builtin.apt:
       name: postgresql-{{ postgresql_version |default(15) }}
-      update_cache: yes
+    notify: Postgresql Installed
+
 
 - name: Start service
   ansible.builtin.service:
     name: postgresql
     state: started
+# TODO: (re)start only if newly installed or modified
 
 - ansible.builtin.include_tasks: createdb.yml

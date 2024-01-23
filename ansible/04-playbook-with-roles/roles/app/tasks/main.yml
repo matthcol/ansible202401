@@ -18,4 +18,8 @@
   tags: PACKAGE
   ansible.builtin.dnf:
     name: nodejs
+- name: Config App/Db
+  ansible.builtin.template:
+    src: appconfig.cfg.j2
+    dest: "{{ app_dir }}/appconfig.cfg"
 
