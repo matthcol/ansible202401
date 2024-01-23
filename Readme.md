@@ -80,4 +80,17 @@ ansible -i hosts -u srvadmin -k -b -K -m user -a "name=ender state=absent remove
 (with user SSH ender and SSH key unlocked)
 ```
  ansible-playbook -i hosts -u ender playbook.yml
+
+ # debug
+ ansible-playbook -i hosts -u ender -v playbook.yml
+ ansible-playbook -i hosts -u ender -vv playbook.yml
+ ansible-playbook -i hosts -u ender -vvv playbook.yml
+ ```
+
+ ## Playbook with roles
+ ### Create role(s) tree
+ ```
+ansible-galaxy init roles/common
+ansible-galaxy init roles/app
+ansible-galaxy init roles/db
  ```
