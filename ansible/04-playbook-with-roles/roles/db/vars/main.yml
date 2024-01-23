@@ -1,0 +1,3 @@
+---
+# vars file for roles/db
+postgresql_version: 16

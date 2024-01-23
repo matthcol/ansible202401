@@ -1,0 +1,5 @@
+---
+- name: Create DB
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: "{{ dbname }}"

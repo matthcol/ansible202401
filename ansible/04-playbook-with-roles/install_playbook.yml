@@ -1,0 +1,14 @@
+---
+- name: Install Database
+  hosts: dbserver
+  become: yes
+  roles:
+    - common
+    - db 
+
+- name: Install Application
+  hosts: appserver
+  become: yes
+  roles:
+    - common
+    - app

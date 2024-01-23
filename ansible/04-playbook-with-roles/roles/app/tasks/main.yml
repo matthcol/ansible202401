@@ -1,0 +1,20 @@
+---
+# tasks file for roles/app
+- name: Create directory
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory
+    owner: "{{ owner }}"
+    group: "{{ owner }}"
+    mode: 0750
+- name: Copy artifact
+  ansible.builtin.copy:
+    src: "{{ dir_artifacts }}/{{ app_artifact }}" 
+    dest: "{{ app_dir }}"
+    owner: "{{ owner }}"
+    group: "{{ owner }}"
+    mode: 0640
+- name: Install nodejs
+  ansible.builtin.dnf:
+    name: nodejs
+

@@ -1,0 +1,6 @@
+---
+# vars file for roles/app
+dir_artifacts: /mnt/artifacts
+app_artifact: app.js
+app_dir: /usr/src/app
+owner: ender

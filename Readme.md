@@ -94,3 +94,30 @@ ansible-galaxy init roles/common
 ansible-galaxy init roles/app
 ansible-galaxy init roles/db
  ```
+
+ ## Links
+ ### Playbook syntax
+ - https://docs.ansible.com/ansible/latest/playbook_guide/playbooks.html
+ ### Builtin Modules
+ - https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html
+ ### Community Collections
+ - https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html
+
+ ## Ansible Configuration
+
+ Create empty config file (as root)
+
+ ```
+ ansible-config init --disabled > /etc/ansible/ansible.cfg
+
+# content:
+[defaults]
+allow_world_readable_tmpfiles=yes
+interpreter_python=/usr/bin/python3
+
+ ```
+
+NB: links
+- https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html
+- https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html
+
