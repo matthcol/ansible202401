@@ -1,3 +1,5 @@
 ---
 # vars file for roles/common
 dbname: dbbbq
+dbuser: bbq
+dbpassword: "p@sSword!"

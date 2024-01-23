@@ -1,5 +1,20 @@
 ---
-- name: Create DB
+- name: Driver Python PostgreSQL
+  ansible.builtin.apt:
+    name: python3-psycopg2
+
+- name: PostgreSQL Administration
   become_user: postgres
-  community.postgresql.postgresql_db:
-    name: "{{ dbname }}"
+  become_method: su
+  become_exe: "sudo su -"
+  block:
+  - name: Create User DB
+    community.postgresql.postgresql_user:
+      name: "{{ dbuser }}"
+      password: "{{ dbpassword }}"
+  - name: Create DB  
+    community.postgresql.postgresql_db:
+      name: "{{ dbname }}"
+      owner: "{{ dbuser }}"
+
+  
